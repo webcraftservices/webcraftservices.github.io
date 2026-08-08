@@ -178,7 +178,7 @@ export default function Business() {
                 className={`relative flex flex-col p-6 sm:p-8 rounded-3xl border ${
                   plan.popular 
                     ? "bg-background border-primary/50 shadow-xl scale-100 lg:scale-105 z-10" 
-                    : "bg-background/50 border-border shadow-sm hover:border-primary/30 transition-colors"
+                    : "bg-background/50 border-border shadow-sm hover:border-primary/30 hover:shadow-md hover:-translate-y-1 transition-all duration-300"
                 }`}
               >
                 {plan.popular && (

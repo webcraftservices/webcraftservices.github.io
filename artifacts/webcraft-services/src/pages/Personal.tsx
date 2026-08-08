@@ -156,7 +156,7 @@ export default function Personal() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="group relative flex flex-col p-6 sm:p-10 rounded-[2rem] bg-card border border-border shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-500"
+                className="group relative flex flex-col p-6 sm:p-10 rounded-[2rem] bg-card border border-border shadow-sm hover:shadow-xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-500"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
                   {service.icon}
@@ -176,7 +176,7 @@ export default function Personal() {
                       form.setValue("package", service.title);
                       scrollToForm();
                     }}
-                    className="text-primary hover:text-primary/80 transition-colors"
+                    className="text-primary hover:text-primary/80 transition-colors rounded-full p-1 -m-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label={`Select ${service.title}`}
                   >
                     <ArrowRight className="w-5 h-5" />

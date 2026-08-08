@@ -50,7 +50,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="group"
           >
-            <Link href="/business" className="block h-full">
+            <Link href="/business" className="block h-full rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               <div className="relative h-full flex flex-col p-6 sm:p-10 md:p-12 rounded-3xl bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-primary/30">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -mr-20 -mt-20 transition-transform group-hover:scale-110" />
                 
@@ -82,7 +82,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="group"
           >
-            <Link href="/personal" className="block h-full">
+            <Link href="/personal" className="block h-full rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               <div className="relative h-full flex flex-col p-6 sm:p-10 md:p-12 rounded-3xl bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-primary/30">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-20 -mt-20 transition-transform group-hover:scale-110" />
                 

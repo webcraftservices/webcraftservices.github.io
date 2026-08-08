@@ -238,3 +238,14 @@
   .hover-elevate-2:hover:not(.no-default-hover-elevate)::after, .active-elevate-2:active:not(.no-default-active-elevate)::after { background-color: var(--elevate-2); }
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after, .border.active-elevate:not(.no-active-interaction-elevate)::after, .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after, .border.active-elevate-2:not(.no-active-interaction-elevate)::after, .border.hover-elevate:not(.no-hover-interaction-elevate)::after { inset: -1px; }
 }
+
+/* Respect the user's OS-level motion preference for plain CSS transitions
+   and animations (framer-motion is handled separately via MotionConfig). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

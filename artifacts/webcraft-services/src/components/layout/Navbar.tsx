@@ -44,7 +44,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md",
+                  "relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isActive ? "text-foreground" : "text-muted-foreground"
                 )}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
@@ -92,7 +92,7 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       className={cn(
-                        "px-4 py-3 text-base font-medium rounded-md transition-colors min-h-11 flex items-center",
+                        "px-4 py-3 text-base font-medium rounded-md transition-colors min-h-11 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         isActive
                           ? "bg-accent text-foreground"
                           : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
