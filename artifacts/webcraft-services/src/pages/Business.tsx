@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -25,6 +25,7 @@ import {
 import { toast } from "sonner";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
 
 const plans = [
   {
@@ -74,11 +75,17 @@ const plans = [
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
   industry: z.string().min(2, "Industry is required"),
-  url: z.string().optional(),
-  email: z.string().email("Invalid email address"),
+  url: z
+    .string()
+    .optional()
+    .refine(
+      (val) => !val || /^https?:\/\/.+\..+/i.test(val),
+      "Please enter a valid URL starting with http:// or https://"
+    ),
+  email: z.string().min(1, "Email is required").email("Please enter a valid email address"),
   phone: z.string().optional(),
   package: z.string().min(1, "Please select a package"),
-  description: z.string().min(10, "Please provide a brief description"),
+  description: z.string().min(10, "Please provide a brief description (at least 10 characters)"),
 });
 
 export default function Business() {
@@ -100,11 +107,33 @@ export default function Business() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Inquiry sent successfully!", {
-      description: "We'll get back to you within 24 hours.",
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await submitInquiry({
+        form_type: "Business Inquiry",
+        _subject: `New business inquiry from ${values.businessName}`,
+        _replyto: values.email,
+        businessName: values.businessName,
+        industry: values.industry,
+        url: values.url || "Not provided",
+        email: values.email,
+        phone: values.phone || "Not provided",
+        package: values.package,
+        description: values.description,
+      });
+      toast.success("Inquiry sent successfully!", {
+        description: "We'll get back to you within 24 hours.",
+      });
+      form.reset();
+    } catch (error) {
+      const message =
+        error instanceof InquirySubmissionError
+          ? error.message
+          : "Something went wrong sending your message. Please try again.";
+      toast.error("Couldn't send your inquiry", {
+        description: message,
+      });
+    }
   }
 
   const scrollToForm = () => {
@@ -245,7 +274,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Business Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Acme Corp" className="rounded-xl" {...field} />
+                          <Input placeholder="Acme Corp" className="rounded-xl" autoComplete="organization" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -271,7 +300,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Contact Email *</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="hello@acme.com" className="rounded-xl" {...field} />
+                          <Input type="email" placeholder="hello@acme.com" className="rounded-xl" autoComplete="email" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -284,7 +313,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Phone Number (Optional)</FormLabel>
                         <FormControl>
-                          <Input type="tel" placeholder="+1 (555) 000-0000" className="rounded-xl" {...field} />
+                          <Input type="tel" placeholder="+1 (555) 000-0000" className="rounded-xl" autoComplete="tel" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -300,7 +329,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Current Website URL (Optional)</FormLabel>
                         <FormControl>
-                          <Input placeholder="https://acme.com" className="rounded-xl" {...field} />
+                          <Input placeholder="https://acme.com" className="rounded-xl" autoComplete="url" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -350,8 +379,20 @@ export default function Business() {
                   )}
                 />
 
-                <Button type="submit" size="lg" className="w-full md:w-auto rounded-full px-10 h-12 text-base">
-                  Submit Inquiry
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={form.formState.isSubmitting}
+                  className="w-full md:w-auto rounded-full px-10 h-12 text-base"
+                >
+                  {form.formState.isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Submit Inquiry"
+                  )}
                 </Button>
               </form>
             </Form>

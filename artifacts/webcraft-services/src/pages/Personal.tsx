@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Gift, ArrowRight } from "lucide-react";
+import { Heart, Sparkles, Gift, ArrowRight, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -25,6 +25,7 @@ import {
 import { toast } from "sonner";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
 
 const services = [
   {
@@ -56,8 +57,8 @@ const services = [
 const formSchema = z.object({
   name: z.string().min(2, "Your name is required"),
   theirName: z.string().optional(),
-  email: z.string().email("Invalid email address"),
-  occasion: z.string().min(10, "Please tell us about the occasion or story"),
+  email: z.string().min(1, "Email is required").email("Please enter a valid email address"),
+  occasion: z.string().min(10, "Please tell us about the occasion or story (at least 10 characters)"),
   package: z.string().min(1, "Please select a package"),
   budget: z.string().optional(),
   requests: z.string().optional(),
@@ -82,11 +83,33 @@ export default function Personal() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Message received!", {
-      description: "We're so excited to help you create this.",
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await submitInquiry({
+        form_type: "Personal Inquiry",
+        _subject: `New personal project inquiry from ${values.name}`,
+        _replyto: values.email,
+        name: values.name,
+        theirName: values.theirName || "Not applicable",
+        email: values.email,
+        occasion: values.occasion,
+        package: values.package,
+        budget: values.budget || "Not specified",
+        requests: values.requests || "None",
+      });
+      toast.success("Message received!", {
+        description: "We're so excited to help you create this.",
+      });
+      form.reset();
+    } catch (error) {
+      const message =
+        error instanceof InquirySubmissionError
+          ? error.message
+          : "Something went wrong sending your message. Please try again.";
+      toast.error("Couldn't send your message", {
+        description: message,
+      });
+    }
   }
 
   const scrollToForm = () => {
@@ -209,7 +232,7 @@ export default function Personal() {
                       <FormItem>
                         <FormLabel>Your Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Jane Doe" className="rounded-xl" {...field} />
+                          <Input placeholder="Jane Doe" className="rounded-xl" autoComplete="name" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -222,7 +245,7 @@ export default function Personal() {
                       <FormItem>
                         <FormLabel>Your Email *</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="jane@example.com" className="rounded-xl" {...field} />
+                          <Input type="email" placeholder="jane@example.com" className="rounded-xl" autoComplete="email" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -332,8 +355,20 @@ export default function Personal() {
                   )}
                 />
 
-                <Button type="submit" size="lg" className="w-full md:w-auto rounded-full px-10 h-12 text-base">
-                  Send with Love
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={form.formState.isSubmitting}
+                  className="w-full md:w-auto rounded-full px-10 h-12 text-base"
+                >
+                  {form.formState.isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send with Love"
+                  )}
                 </Button>
               </form>
             </Form>
