@@ -1,9 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MotionConfig } from 'framer-motion';
-import { Toaster } from '@/components/ui/toaster';
 import { Toaster as SonnerToaster } from '@/components/ui/sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { Layout } from '@/components/layout/Layout';
 
@@ -11,8 +8,6 @@ const Home = lazy(() => import('@/pages/Home'));
 const Business = lazy(() => import('@/pages/Business'));
 const Personal = lazy(() => import('@/pages/Personal'));
 const NotFound = lazy(() => import('@/pages/not-found'));
-
-const queryClient = new QueryClient();
 
 function Router() {
   return (
@@ -31,17 +26,12 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MotionConfig reducedMotion="user">
-        <TooltipProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-            <Router />
-          </WouterRouter>
-          <Toaster />
-          <SonnerToaster />
-        </TooltipProvider>
-      </MotionConfig>
-    </QueryClientProvider>
+    <MotionConfig reducedMotion="user">
+      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+        <Router />
+      </WouterRouter>
+      <SonnerToaster />
+    </MotionConfig>
   );
 }
 
