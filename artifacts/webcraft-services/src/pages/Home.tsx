@@ -15,7 +15,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full py-16 sm:py-24 md:py-32 px-4 sm:px-6 flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 -z-20 opacity-20 dark:opacity-10 pointer-events-none">
-          <img src="/home-hero.svg" alt="Creative Studio" className="w-full h-full object-cover blur-sm" />
+          <img src="/home-hero.svg" alt="" className="w-full h-full object-cover blur-sm" />
         </div>
         
         <motion.div 

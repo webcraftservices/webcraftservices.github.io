@@ -230,7 +230,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Business Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Acme Corp" className="rounded-xl" autoComplete="organization" {...field} />
+                          <Input placeholder="Acme Corp" className="rounded-xl" autoComplete="organization" required aria-required="true" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -243,7 +243,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Industry / Type *</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g. Architecture, Retail" className="rounded-xl" {...field} />
+                          <Input placeholder="e.g. Architecture, Retail" className="rounded-xl" required aria-required="true" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -256,7 +256,7 @@ export default function Business() {
                       <FormItem>
                         <FormLabel>Contact Email *</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="hello@acme.com" className="rounded-xl" autoComplete="email" {...field} />
+                          <Input type="email" placeholder="hello@acme.com" className="rounded-xl" autoComplete="email" required aria-required="true" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -299,7 +299,7 @@ export default function Business() {
                         <FormLabel>Selected Package *</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="rounded-xl">
+                            <SelectTrigger className="rounded-xl" aria-required="true">
                               <SelectValue placeholder="Select a package" />
                             </SelectTrigger>
                           </FormControl>
@@ -327,6 +327,8 @@ export default function Business() {
                         <Textarea 
                           placeholder="Tell us a bit about your goals, target audience, and any specific features you need..."
                           className="min-h-[120px] rounded-xl"
+                          required
+                          aria-required="true"
                           {...field}
                         />
                       </FormControl>

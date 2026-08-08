@@ -208,7 +208,7 @@ export default function Personal() {
                       <FormItem>
                         <FormLabel>Your Name *</FormLabel>
                         <FormControl>
-                          <Input placeholder="Jane Doe" className="rounded-xl" autoComplete="name" {...field} />
+                          <Input placeholder="Jane Doe" className="rounded-xl" autoComplete="name" required aria-required="true" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -221,7 +221,7 @@ export default function Personal() {
                       <FormItem>
                         <FormLabel>Your Email *</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="jane@example.com" className="rounded-xl" autoComplete="email" {...field} />
+                          <Input type="email" placeholder="jane@example.com" className="rounded-xl" autoComplete="email" required aria-required="true" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -251,7 +251,7 @@ export default function Personal() {
                         <FormLabel>Selected Package *</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="rounded-xl">
+                            <SelectTrigger className="rounded-xl" aria-required="true">
                               <SelectValue placeholder="Select a package" />
                             </SelectTrigger>
                           </FormControl>
@@ -279,6 +279,8 @@ export default function Personal() {
                         <Textarea 
                           placeholder="Tell us what you want to create and why it's special..."
                           className="min-h-[120px] rounded-xl"
+                          required
+                          aria-required="true"
                           {...field}
                         />
                       </FormControl>
