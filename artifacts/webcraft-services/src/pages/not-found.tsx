@@ -7,15 +7,15 @@ export default function NotFound() {
   useDocumentTitle("Page Not Found | WebCraft Studio", "The page you are looking for does not exist.");
 
   return (
-    <div className="flex-1 flex items-center justify-center min-h-[60vh] px-6">
+    <div className="flex-1 flex items-center justify-center min-h-[60vh] px-4 sm:px-6">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center max-w-md"
       >
-        <h1 className="text-8xl font-serif font-bold text-primary mb-6">404</h1>
-        <h2 className="text-3xl font-serif font-bold mb-4">Page not found</h2>
-        <p className="text-muted-foreground mb-8 text-lg">
+        <h1 className="text-6xl sm:text-8xl font-serif font-bold text-primary mb-6">404</h1>
+        <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-4">Page not found</h2>
+        <p className="text-muted-foreground mb-8 text-base sm:text-lg">
           The space you're looking for doesn't exist. Let's get you back to familiar ground.
         </p>
         <Link 

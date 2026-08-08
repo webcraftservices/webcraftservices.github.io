@@ -96,8 +96,8 @@ export default function Personal() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero */}
-      <section className="relative w-full py-20 px-6 lg:flex lg:items-center lg:flex-row-reverse lg:gap-16 lg:py-32">
-        <div className="flex-1 space-y-8 z-10">
+      <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 lg:flex lg:items-center lg:flex-row-reverse lg:gap-16 lg:py-32">
+        <div className="flex-1 space-y-6 sm:space-y-8 z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -106,13 +106,13 @@ export default function Personal() {
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
               Personal Projects
             </div>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
               Handcrafted with <span className="text-primary italic">heart.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-8">
               Digital spaces don't have to be cold. We build warm, intimate, and bespoke digital experiences meant to celebrate, remember, and connect.
             </p>
-            <Button size="lg" onClick={scrollToForm} className="rounded-full text-base h-12 px-8">
+            <Button size="lg" onClick={scrollToForm} className="w-full sm:w-auto rounded-full text-base h-12 px-8">
               Start something special
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -120,7 +120,7 @@ export default function Personal() {
         </div>
         
         <motion.div 
-          className="flex-1 mt-12 lg:mt-0 relative"
+          className="flex-1 mt-10 sm:mt-12 lg:mt-0 relative"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -139,16 +139,16 @@ export default function Personal() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 px-6 bg-primary/5 border-y border-primary/10">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-primary/5 border-y border-primary/10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Meaningful Digital Spaces</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
               Choose the perfect canvas for your story or celebration.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {services.map((service, i) => (
               <motion.div
                 key={service.id}
@@ -156,7 +156,7 @@ export default function Personal() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="group relative flex flex-col p-10 rounded-[2rem] bg-card border border-border shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-500"
+                className="group relative flex flex-col p-6 sm:p-10 rounded-[2rem] bg-card border border-border shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-500"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
                   {service.icon}
@@ -189,16 +189,16 @@ export default function Personal() {
       </section>
 
       {/* Inquiry Form */}
-      <section id="personal-form" className="py-24 px-6 scroll-mt-20">
+      <section id="personal-form" className="py-16 sm:py-24 px-4 sm:px-6 scroll-mt-20">
         <div className="max-w-2xl mx-auto">
-          <div className="mb-12 text-center">
+          <div className="mb-8 sm:mb-12 text-center">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Start Your Personal Project</h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Let's craft something beautiful together. Tell us what you have in mind.
             </p>
           </div>
 
-          <div className="bg-card p-8 md:p-12 rounded-[2rem] border border-border shadow-sm">
+          <div className="bg-card p-5 sm:p-8 md:p-12 rounded-[2rem] border border-border shadow-sm">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

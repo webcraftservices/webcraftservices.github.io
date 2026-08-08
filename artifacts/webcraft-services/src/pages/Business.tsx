@@ -114,8 +114,8 @@ export default function Business() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero */}
-      <section className="relative w-full py-20 px-6 lg:flex lg:items-center lg:gap-16 lg:py-32">
-        <div className="flex-1 space-y-8 z-10">
+      <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 lg:flex lg:items-center lg:gap-16 lg:py-32">
+        <div className="flex-1 space-y-6 sm:space-y-8 z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,13 +124,13 @@ export default function Business() {
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-secondary/10 text-secondary-foreground text-sm font-medium mb-6">
               Professional Services
             </div>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-foreground leading-[1.1] tracking-tight mb-6">
               Precision-crafted for <span className="text-secondary-foreground italic">results.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-8">
               Your business deserves more than a generic template. We build digital flagships that communicate authority, build trust, and drive meaningful conversions.
             </p>
-            <Button size="lg" onClick={scrollToForm} className="rounded-full text-base h-12 px-8">
+            <Button size="lg" onClick={scrollToForm} className="w-full sm:w-auto rounded-full text-base h-12 px-8">
               Start your project
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -138,7 +138,7 @@ export default function Business() {
         </div>
         
         <motion.div 
-          className="flex-1 mt-12 lg:mt-0 relative"
+          className="flex-1 mt-10 sm:mt-12 lg:mt-0 relative"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -158,16 +158,16 @@ export default function Business() {
       </section>
 
       {/* Pricing */}
-      <section className="py-24 px-6 bg-card border-y border-border/40">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-card border-y border-border/40">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Investment Plans</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
               Transparent pricing for professional quality. No hidden fees.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
             {plans.map((plan, i) => (
               <motion.div
                 key={plan.name}
@@ -175,9 +175,9 @@ export default function Business() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative flex flex-col p-8 rounded-3xl border ${
+                className={`relative flex flex-col p-6 sm:p-8 rounded-3xl border ${
                   plan.popular 
-                    ? "bg-background border-primary/50 shadow-xl scale-100 md:scale-105 z-10" 
+                    ? "bg-background border-primary/50 shadow-xl scale-100 lg:scale-105 z-10" 
                     : "bg-background/50 border-border shadow-sm hover:border-primary/30 transition-colors"
                 }`}
               >
@@ -225,16 +225,16 @@ export default function Business() {
       </section>
 
       {/* Inquiry Form */}
-      <section id="inquiry-form" className="py-24 px-6 scroll-mt-20">
+      <section id="inquiry-form" className="py-16 sm:py-24 px-4 sm:px-6 scroll-mt-20">
         <div className="max-w-3xl mx-auto">
-          <div className="mb-12 text-center">
+          <div className="mb-8 sm:mb-12 text-center">
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Tell Us About Your Business</h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Fill out the form below to start the conversation. We'll be in touch to schedule a discovery call.
             </p>
           </div>
 
-          <div className="bg-card p-8 md:p-12 rounded-3xl border border-border shadow-sm">
+          <div className="bg-card p-5 sm:p-8 md:p-12 rounded-3xl border border-border shadow-sm">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
