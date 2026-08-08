@@ -36,6 +36,16 @@ export function Footer() {
           © {new Date().getFullYear()} WebCraft Studio. All rights reserved.
         </div>
       </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8 pt-8 border-t border-border/40 text-center">
+        <p className="text-sm font-semibold text-foreground mb-1">Need help?</p>
+        <a
+          href="mailto:contact.webcraftservices@gmail.com"
+          className="text-sm text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Contact us at contact.webcraftservices@gmail.com
+        </a>
+      </div>
     </footer>
   );
 }
