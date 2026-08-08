@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Gift, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -26,33 +26,8 @@ import { toast } from "sonner";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
 import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
+import { personalServices, personalBudgetRanges } from "@/data/pricing";
 
-const services = [
-  {
-    id: "custom",
-    title: "Personal Customized Website",
-    price: "$199",
-    icon: <Sparkles className="w-6 h-6" />,
-    description: "For anyone wanting their own corner of the internet. Portfolio, personal brand, creative blog, or passion project. Your story, beautifully told.",
-    delivery: "7 days"
-  },
-  {
-    id: "occasion",
-    title: "Special Occasion Website",
-    price: "$149",
-    icon: <Gift className="w-6 h-6" />,
-    description: "Birthdays, anniversaries, graduations, milestones. A bespoke webpage dedicated to celebrating someone's special moment—with photos, messages, and memories.",
-    delivery: "3 days"
-  },
-  {
-    id: "love",
-    title: "For Loved Ones",
-    price: "$179",
-    icon: <Heart className="w-6 h-6" />,
-    description: "The most heartfelt option. A custom digital love letter—for a partner, parent, best friend, or anyone who deserves to feel truly seen. Personalized in every detail.",
-    delivery: "5 days"
-  }
-];
 
 const formSchema = z.object({
   name: z.string().min(2, "Your name is required"),
@@ -172,7 +147,7 @@ export default function Personal() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {services.map((service, i) => (
+            {personalServices.map((service, i) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -182,7 +157,7 @@ export default function Personal() {
                 className="group relative flex flex-col p-6 sm:p-10 rounded-[2rem] bg-card border border-border shadow-sm hover:shadow-xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-500"
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-                  {service.icon}
+                  <service.icon className="w-6 h-6" />
                 </div>
                 
                 <h3 className="text-2xl font-serif font-bold mb-2">{service.title}</h3>
@@ -280,7 +255,7 @@ export default function Personal() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {services.map((s) => (
+                            {personalServices.map((s) => (
                               <SelectItem key={s.id} value={s.title}>
                                 {s.title}
                               </SelectItem>
@@ -325,10 +300,11 @@ export default function Personal() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="under-100">Under $100</SelectItem>
-                            <SelectItem value="100-200">$100 - $200</SelectItem>
-                            <SelectItem value="200-300">$200 - $300</SelectItem>
-                            <SelectItem value="no-limit">No limit</SelectItem>
+                            {personalBudgetRanges.map((range) => (
+                              <SelectItem key={range.value} value={range.value}>
+                                {range.label}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                         <FormMessage />

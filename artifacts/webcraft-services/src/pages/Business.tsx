@@ -26,51 +26,7 @@ import { toast } from "sonner";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
 import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
-
-const plans = [
-  {
-    name: "Starter Business",
-    price: "$299",
-    delivery: "5 days",
-    description: "Perfect for establishing a professional online presence quickly.",
-    features: [
-      "Single-page website",
-      "Mobile responsive design",
-      "Contact form integration",
-      "Basic SEO setup",
-      "1 revision round",
-    ],
-  },
-  {
-    name: "Professional Business",
-    price: "$599",
-    delivery: "10 days",
-    popular: true,
-    description: "For growing businesses that need more depth and capability.",
-    features: [
-      "Multi-page site (up to 5 pages)",
-      "Custom design & branding",
-      "CMS integration (manage your content)",
-      "Analytics setup",
-      "Advanced contact forms",
-      "2 revision rounds",
-    ],
-  },
-  {
-    name: "Enterprise Business",
-    price: "$999",
-    delivery: "15 days",
-    description: "A comprehensive digital flagship for established brands.",
-    features: [
-      "Fully custom multi-page architecture",
-      "E-commerce ready capability",
-      "Advanced technical SEO",
-      "Custom features & animations",
-      "Priority VIP support",
-      "Unlimited revisions during build",
-    ],
-  },
-];
+import { businessPlans } from "@/data/pricing";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -197,9 +153,9 @@ export default function Business() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
-            {plans.map((plan, i) => (
+            {businessPlans.map((plan, i) => (
               <motion.div
-                key={plan.name}
+                key={plan.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -348,8 +304,8 @@ export default function Business() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {plans.map((p) => (
-                              <SelectItem key={p.name} value={p.name}>
+                            {businessPlans.map((p) => (
+                              <SelectItem key={p.id} value={p.name}>
                                 {p.name} - {p.price}
                               </SelectItem>
                             ))}
