@@ -1,0 +1,187 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: WebCraft Services API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: inquiries
+    description: Client inquiry operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /inquiries/business:
+    post:
+      operationId: submitBusinessInquiry
+      tags: [inquiries]
+      summary: Submit a business inquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BusinessInquiryInput"
+      responses:
+        "201":
+          description: Inquiry created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusinessInquiry"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /inquiries/personal:
+    post:
+      operationId: submitPersonalInquiry
+      tags: [inquiries]
+      summary: Submit a personal inquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonalInquiryInput"
+      responses:
+        "201":
+          description: Inquiry created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalInquiry"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    BusinessInquiryInput:
+      type: object
+      required: [businessName, industry, email, package, description]
+      properties:
+        businessName:
+          type: string
+          minLength: 2
+        industry:
+          type: string
+          minLength: 2
+        url:
+          type: ["string", "null"]
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        package:
+          type: string
+        description:
+          type: string
+          minLength: 10
+
+    BusinessInquiry:
+      type: object
+      required: [id, businessName, industry, email, package, description, createdAt]
+      properties:
+        id:
+          type: integer
+        businessName:
+          type: string
+        industry:
+          type: string
+        url:
+          type: ["string", "null"]
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        package:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    PersonalInquiryInput:
+      type: object
+      required: [name, email, occasion, package]
+      properties:
+        name:
+          type: string
+          minLength: 2
+        theirName:
+          type: ["string", "null"]
+        email:
+          type: string
+        occasion:
+          type: string
+          minLength: 10
+        package:
+          type: string
+        budget:
+          type: ["string", "null"]
+        requests:
+          type: ["string", "null"]
+
+    PersonalInquiry:
+      type: object
+      required: [id, name, email, occasion, package, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        theirName:
+          type: ["string", "null"]
+        email:
+          type: string
+        occasion:
+          type: string
+        package:
+          type: string
+        budget:
+          type: ["string", "null"]
+        requests:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time

@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "WebCraft Services"
+description = "A services website for a web developer offering two main categories: Business websites (ready-made, professional sites for companies with pricing and inquiry forms) and Personal websites (customized sites for special occasions, loved ones, and personal use). Visitors land on a homepage with two clear paths, then explore service tiers with pricing before submitting their project details."
+version = "1.0.0"
+id = "artifacts/webcraft-services"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23891
+
+[services.development]
+run = "pnpm --filter @workspace/webcraft-services run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/webcraft-services", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/webcraft-services/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23891"
+BASE_PATH = "/"

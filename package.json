@@ -1,0 +1,16 @@
+{
+  "name": "webcraft-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix artifacts/webcraft-services run dev",
+    "build": "npm --prefix artifacts/webcraft-services run build",
+    "serve": "npm --prefix artifacts/webcraft-services run serve",
+    "typecheck": "npm --prefix artifacts/webcraft-services run typecheck"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.4",
+    "typescript": "~5.9.3"
+  }
+}
