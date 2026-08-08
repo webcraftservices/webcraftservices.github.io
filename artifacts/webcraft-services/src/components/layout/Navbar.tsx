@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -19,9 +20,22 @@ const links = [
   { href: "/personal", label: "Personal" },
 ];
 
+// Maps a route to the id of that page's inquiry form, so the nav CTA
+// can jump straight to it. Routes without a form (e.g. Home) get no CTA.
+const formTargetByRoute: Record<string, string> = {
+  "/business": "inquiry-form",
+  "/personal": "personal-form",
+};
+
 export function Navbar() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
+  const formTargetId = formTargetByRoute[location];
+
+  const scrollToForm = () => {
+    formTargetId &&
+      document.getElementById(formTargetId)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <nav className="w-full border-b border-border/40 backdrop-blur-md bg-background/80 sticky top-0 z-50">
@@ -60,6 +74,16 @@ export function Navbar() {
               </Link>
             );
           })}
+          {formTargetId && (
+            <Button
+              size="sm"
+              onClick={scrollToForm}
+              className="ml-2 rounded-full px-5"
+              data-testid="button-nav-cta"
+            >
+              Start a Project
+            </Button>
+          )}
         </div>
 
         {/* Mobile nav trigger */}
@@ -105,6 +129,19 @@ export function Navbar() {
                 );
               })}
             </div>
+            {formTargetId && (
+              <div className="mt-auto pt-6">
+                <SheetClose asChild>
+                  <Button
+                    onClick={scrollToForm}
+                    className="w-full rounded-full"
+                    data-testid="button-mobile-nav-cta"
+                  >
+                    Start a Project
+                  </Button>
+                </SheetClose>
+              </div>
+            )}
           </SheetContent>
         </Sheet>
       </div>

@@ -167,17 +167,18 @@ export default function Personal() {
                   {service.description}
                 </p>
                 
-                <div className="flex items-center justify-between mt-auto pt-6 border-t border-border/50">
+                <div className="flex items-center justify-between mt-auto pt-6 border-t border-border/50 gap-3">
                   <span className="text-sm font-medium text-muted-foreground">Delivered in {service.delivery}</span>
                   <button 
                     onClick={() => {
                       form.setValue("package", service.title);
                       scrollToForm();
                     }}
-                    className="text-primary hover:text-primary/80 transition-colors rounded-full p-1 -m-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary/80 hover:bg-primary/10 transition-colors rounded-full pl-3 pr-2.5 py-1.5 -mr-2.5 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     aria-label={`Select ${service.title}`}
                   >
-                    <ArrowRight className="w-5 h-5" />
+                    Select
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </button>
                 </div>
               </motion.div>
