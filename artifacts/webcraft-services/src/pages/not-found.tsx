@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function NotFound() {
-  useDocumentTitle("Page Not Found | WebCraft Studio", "The page you are looking for does not exist.");
+  useDocumentTitle("Page Not Found | WebCraft Studio", "The page you are looking for does not exist.", true);
 
   return (
     <div className="flex-1 flex items-center justify-center min-h-[60vh] px-4 sm:px-6">
