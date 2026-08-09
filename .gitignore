@@ -53,3 +53,11 @@ Thumbs.db
 .env.local
 .env.*.local
 !.env.example
+
+# Common secret/credential file patterns
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
