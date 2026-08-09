@@ -3,9 +3,11 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
+import { useScrollToTop } from "@/hooks/use-scroll-to-top";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
+  useScrollToTop();
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-background text-foreground overflow-x-hidden">
