@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, scrollToId } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,11 +14,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-const links = [
-  { href: "/", label: "Studio" },
-  { href: "/business", label: "Business" },
-  { href: "/personal", label: "Personal" },
-];
+import { navLinks } from "@/data/navigation";
 
 // Maps a route to the id of that page's inquiry form, so the nav CTA
 // can jump straight to it. Routes without a form (e.g. Home) get no CTA.
@@ -33,8 +29,7 @@ export function Navbar() {
   const formTargetId = formTargetByRoute[location];
 
   const scrollToForm = () => {
-    formTargetId &&
-      document.getElementById(formTargetId)?.scrollIntoView({ behavior: "smooth" });
+    if (formTargetId) scrollToId(formTargetId);
   };
 
   return (
@@ -51,7 +46,7 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex gap-1 md:gap-4 items-center">
-          {links.map((link) => {
+          {navLinks.map((link) => {
             const isActive = location === link.href;
             return (
               <Link
@@ -109,7 +104,7 @@ export function Navbar() {
               </SheetDescription>
             </SheetHeader>
             <div className="flex flex-col gap-1 mt-6">
-              {links.map((link) => {
+              {navLinks.map((link) => {
                 const isActive = location === link.href;
                 return (
                   <SheetClose asChild key={link.href}>

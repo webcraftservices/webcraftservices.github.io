@@ -27,6 +27,7 @@ import { toast } from "sonner";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
 import { personalServices, personalBudgetRanges } from "@/data/pricing";
+import { scrollToId } from "@/lib/utils";
 
 
 const formSchema = z.object({
@@ -87,9 +88,7 @@ export default function Personal() {
     }
   }
 
-  const scrollToForm = () => {
-    document.getElementById("personal-form")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToForm = () => scrollToId("personal-form");
 
   return (
     <div className="flex flex-col w-full">

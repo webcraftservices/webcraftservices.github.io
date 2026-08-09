@@ -1,10 +1,5 @@
 import { Link } from "wouter";
-
-const links = [
-  { href: "/", label: "Studio" },
-  { href: "/business", label: "Business" },
-  { href: "/personal", label: "Personal" },
-];
+import { navLinks } from "@/data/navigation";
 
 export function Footer() {
   return (
@@ -21,7 +16,7 @@ export function Footer() {
         </div>
 
         <nav aria-label="Footer" className="flex items-center gap-6">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
