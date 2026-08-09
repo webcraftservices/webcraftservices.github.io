@@ -130,7 +130,7 @@ export default function Business() {
           <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] max-w-xl mx-auto border border-border/50">
             <img 
               src="/business-hero.svg" 
-              alt="Professional Workspace" 
+              alt="Preview of a clean, professional business website with a growth chart" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-background/40 to-transparent" />

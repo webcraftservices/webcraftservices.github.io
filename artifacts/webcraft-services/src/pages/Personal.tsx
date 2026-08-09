@@ -125,7 +125,7 @@ export default function Personal() {
           <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto border border-border/50">
             <img 
               src="/personal-hero.svg" 
-              alt="Intimate workspace" 
+              alt="Layered keepsake photo cards with a heart, representing a personal website" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
