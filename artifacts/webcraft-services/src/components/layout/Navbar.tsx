@@ -1,19 +1,7 @@
-import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu } from "lucide-react";
 import { cn, scrollToId } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
-
 import { navLinks } from "@/data/navigation";
 
 // Maps a route to the id of that page's inquiry form, so the nav CTA
@@ -25,7 +13,6 @@ const formTargetByRoute: Record<string, string> = {
 
 export function Navbar() {
   const [location] = useLocation();
-  const [open, setOpen] = useState(false);
   const formTargetId = formTargetByRoute[location];
 
   const scrollToForm = () => {
@@ -44,8 +31,7 @@ export function Navbar() {
           WebCraft
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex gap-1 md:gap-4 items-center">
+        <div className="flex gap-1 md:gap-4 items-center">
           {navLinks.map((link) => {
             const isActive = location === link.href;
             return (
@@ -80,65 +66,6 @@ export function Navbar() {
             </Button>
           )}
         </div>
-
-        {/* Mobile nav trigger */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <button
-              type="button"
-              className="md:hidden inline-flex items-center justify-center h-11 w-11 -mr-2 rounded-md text-foreground hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              aria-label="Open menu"
-              data-testid="button-mobile-menu"
-            >
-              <Menu className="h-6 w-6" />
-            </button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-3/4 sm:max-w-xs flex flex-col">
-            <SheetHeader>
-              <SheetTitle className="font-serif text-xl text-primary flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                WebCraft
-              </SheetTitle>
-              <SheetDescription className="sr-only">
-                Site navigation menu
-              </SheetDescription>
-            </SheetHeader>
-            <div className="flex flex-col gap-1 mt-6">
-              {navLinks.map((link) => {
-                const isActive = location === link.href;
-                return (
-                  <SheetClose asChild key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "px-4 py-3 text-base font-medium rounded-md transition-colors min-h-11 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                        isActive
-                          ? "bg-accent text-foreground"
-                          : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
-                      )}
-                      data-testid={`link-mobile-nav-${link.label.toLowerCase()}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </SheetClose>
-                );
-              })}
-            </div>
-            {formTargetId && (
-              <div className="mt-auto pt-6">
-                <SheetClose asChild>
-                  <Button
-                    onClick={scrollToForm}
-                    className="w-full rounded-full"
-                    data-testid="button-mobile-nav-cta"
-                  >
-                    Start a Project
-                  </Button>
-                </SheetClose>
-              </div>
-            )}
-          </SheetContent>
-        </Sheet>
       </div>
     </nav>
   );

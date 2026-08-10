@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { Link } from "wouter";
+import { ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -92,6 +93,16 @@ export default function Personal() {
 
   return (
     <div className="flex flex-col w-full">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          data-testid="link-back-to-studio"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Studio
+        </Link>
+      </div>
       {/* Hero */}
       <section className="relative w-full py-14 sm:py-20 px-4 sm:px-6 lg:flex lg:items-center lg:flex-row-reverse lg:gap-16 lg:py-32">
         <div className="flex-1 space-y-6 sm:space-y-8 z-10">
