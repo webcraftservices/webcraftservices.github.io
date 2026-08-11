@@ -22,7 +22,7 @@ export const businessPlans: BusinessPlan[] = [
   {
     id: "starter-business",
     name: "Starter Business",
-    price: "$299",
+    price: "₹499",
     delivery: "5 days",
     description:
       "Perfect for establishing a professional online presence quickly.",
@@ -37,8 +37,8 @@ export const businessPlans: BusinessPlan[] = [
   {
     id: "professional-business",
     name: "Professional Business",
-    price: "$599",
-    delivery: "10 days",
+    price: "₹999",
+    delivery: "7 days",
     popular: true,
     description:
       "For growing businesses that need more depth and capability.",
@@ -54,8 +54,8 @@ export const businessPlans: BusinessPlan[] = [
   {
     id: "enterprise-business",
     name: "Enterprise Business",
-    price: "$999",
-    delivery: "15 days",
+    price: "₹1999",
+    delivery: "14 days",
     description: "A comprehensive digital flagship for established brands.",
     features: [
       "Fully custom multi-page architecture",
@@ -81,36 +81,38 @@ export const personalServices: PersonalService[] = [
   {
     id: "custom",
     title: "Personal Customized Website",
-    price: "$199",
+    price: "from ₹199",
     icon: Sparkles,
     description:
       "For anyone wanting their own corner of the internet. Portfolio, personal brand, creative blog, or passion project. Your story, beautifully told.",
-    delivery: "7 days",
+    delivery: "5 days",
   },
   {
     id: "occasion",
     title: "Special Occasion Website",
-    price: "$149",
+    price: "₹299",
     icon: Gift,
     description:
       "Birthdays, anniversaries, graduations, milestones. A bespoke webpage dedicated to celebrating someone's special moment—with photos, messages, and memories.",
-    delivery: "3 days",
+    delivery: "7 days",
   },
   {
     id: "love",
     title: "For Loved Ones",
-    price: "$179",
+    price: "₹499",
     icon: Heart,
     description:
       "The most heartfelt option. A custom digital love letter—for a partner, parent, best friend, or anyone who deserves to feel truly seen. Personalized in every detail.",
-    delivery: "5 days",
+    delivery: "7 days",
   },
 ];
 
 /** Budget ranges offered in the Personal inquiry form. */
 export const personalBudgetRanges: { value: string; label: string }[] = [
-  { value: "under-100", label: "Under $100" },
-  { value: "100-200", label: "$100 - $200" },
-  { value: "200-300", label: "$200 - $300" },
+  { value: "under-199", label: "Under ₹199" },
+  { value: "199-399", label: "₹199 - ₹399" },
+  { value: "399-599", label: "₹399 -₹599" },
+  { value: "599-999", label: "₹599 - ₹999" },
+  { value: "above 999", label: "Above ₹999" },
   { value: "no-limit", label: "No limit" },
 ];
