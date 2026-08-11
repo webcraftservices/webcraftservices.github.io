@@ -3,6 +3,7 @@ import { MotionConfig } from 'framer-motion';
 import { Toaster as SonnerToaster } from '@/components/ui/sonner';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { Layout } from '@/components/layout/Layout';
+import { IntroAnimation } from '@/components/IntroAnimation';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Business = lazy(() => import('@/pages/Business'));
@@ -31,6 +32,7 @@ function App() {
         <Router />
       </WouterRouter>
       <SonnerToaster />
+      <IntroAnimation />
     </MotionConfig>
   );
 }
