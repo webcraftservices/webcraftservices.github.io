@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Replace with your real domain once deployed (see public/sitemap.xml)
-Sitemap: https://webcraftservices.github.io/sitemap.xml
+Sitemap: https://webcraftservices.online/sitemap.xml

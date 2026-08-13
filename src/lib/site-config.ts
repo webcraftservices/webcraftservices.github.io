@@ -11,7 +11,7 @@
  */
 export const SITE_URL: string = (
   (import.meta.env.VITE_SITE_URL as string | undefined) ||
-  "https://webcraftservices.github.io"
+  "https://webcraftservices.online"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "WebCraft Studio";
