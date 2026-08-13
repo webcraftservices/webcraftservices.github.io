@@ -7,17 +7,17 @@
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://your-domain-here.com/</loc>
+    <loc>https://webcraftservices.github.io/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://your-domain-here.com/business</loc>
+    <loc>https:/webcraftservices.github.io/business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-domain-here.com/personal</loc>
+    <loc>https://webcraftservices.github.io/personal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
