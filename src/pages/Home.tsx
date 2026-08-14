@@ -1,13 +1,60 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Briefcase } from "lucide-react";
+import { ArrowRight, Sparkles, Briefcase, Mail, MessageSquare, Wrench, Rocket } from "lucide-react";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { useStructuredData } from "@/hooks/use-structured-data";
+import { schemaGraph, webPageSchema, faqSchema, type FaqItem } from "@/lib/structured-data";
+import { CONTACT_EMAIL } from "@/lib/site-config";
+
+const homeFaqs: FaqItem[] = [
+  {
+    question: "What does WebCraft Services build?",
+    answer:
+      "Two kinds of websites: conversion-focused sites for businesses, startups, and entrepreneurs, and handcrafted personal sites — portfolios, milestone pages, and digital love letters — for individuals.",
+  },
+  {
+    question: "How does the process work?",
+    answer:
+      "Pick the Business or Personal path, fill out the short inquiry form for the plan that fits, and we'll follow up by email to confirm the details before starting work.",
+  },
+  {
+    question: "How long does a website take to build?",
+    answer:
+      "It depends on scope. Delivery timelines are listed on each plan on the Business and Personal pages, ranging from a few days for a single-page site up to two weeks for a fully custom build.",
+  },
+  {
+    question: "Are the websites mobile-friendly?",
+    answer:
+      "Yes — every plan includes a mobile-responsive design as standard, not an add-on.",
+  },
+  {
+    question: "Can I customize the design?",
+    answer:
+      "Yes. Higher-tier plans include custom design and branding, and every plan includes at least one round of revisions — see the specific plan details on the Business and Personal pages.",
+  },
+  {
+    question: "How do I get in touch?",
+    answer: `The fastest way is the inquiry form on the Business or Personal page. You can also reach out directly at ${CONTACT_EMAIL}.`,
+  },
+];
 
 export default function Home() {
   useDocumentTitle(
-    "WebCraft Studio | Web Developer for Business & Personal Projects",
-    "A boutique digital studio building functional powerhouses for businesses and handcrafted emotional experiences for individuals."
+    "Business & Personal Website Development | WebCraft Services",
+    "WebCraft Services designs professional business websites and handcrafted personal sites — mobile-responsive, custom-designed, and delivered in days, not months."
+  );
+
+  useStructuredData(
+    schemaGraph([
+      webPageSchema({
+        path: "/",
+        name: "Business & Personal Website Development | WebCraft Services",
+        description:
+          "WebCraft Services designs professional business websites and handcrafted personal sites — mobile-responsive, custom-designed, and delivered in days, not months.",
+      }),
+      faqSchema(homeFaqs),
+    ])
   );
 
   return (
@@ -15,7 +62,15 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full py-16 sm:py-24 md:py-32 px-4 sm:px-6 flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 -z-20 opacity-20 dark:opacity-10 pointer-events-none">
-          <img src={`${import.meta.env.BASE_URL}home-hero.svg`} alt="" className="w-full h-full object-cover blur-sm" />
+          <img
+            src={`${import.meta.env.BASE_URL}home-hero.svg`}
+            alt=""
+            aria-hidden="true"
+            width={1200}
+            height={900}
+            loading="eager"
+            className="w-full h-full object-cover blur-sm"
+          />
         </div>
         
         <motion.div 
@@ -106,6 +161,74 @@ export default function Home() {
             </Link>
           </motion.div>
 
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="w-full px-4 sm:px-6 pb-16 sm:pb-24 md:pb-32">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">How It Works</h2>
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+              A simple, transparent path from first message to a finished website.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {[
+              {
+                icon: MessageSquare,
+                title: "Tell us about it",
+                description: "Choose the Business or Personal path and fill out a short inquiry form describing your project.",
+              },
+              {
+                icon: Mail,
+                title: "We follow up",
+                description: "We review your inquiry and reply by email to confirm scope, package, and timeline.",
+              },
+              {
+                icon: Wrench,
+                title: "We build",
+                description: "Your site is designed and developed within the delivery window shown on your chosen plan.",
+              },
+              {
+                icon: Rocket,
+                title: "You launch",
+                description: "After your revision rounds, your finished website goes live.",
+              },
+            ].map((step, i) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex flex-col items-center text-center p-6 rounded-2xl"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                  <step.icon className="w-6 h-6" aria-hidden="true" />
+                </div>
+                <h3 className="font-serif font-bold text-lg mb-2">{step.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="w-full px-4 sm:px-6 pb-16 sm:pb-24 md:pb-32">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Frequently Asked Questions</h2>
+          </div>
+          <div className="space-y-6">
+            {homeFaqs.map((faq) => (
+              <div key={faq.question} className="rounded-2xl border border-border bg-card p-6">
+                <h3 className="font-semibold text-foreground mb-2">{faq.question}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

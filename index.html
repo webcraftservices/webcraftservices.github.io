@@ -3,33 +3,90 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebCraft Studio | Web Developer for Business & Personal Projects</title>
-    <meta name="description" content="WebCraft Studio builds professional websites for businesses and handcrafted personal web experiences." />
+    <title>Business & Personal Website Development | WebCraft Services</title>
+    <meta name="description" content="WebCraft Services designs professional business websites and handcrafted personal sites — mobile-responsive, custom-designed, and delivered in days, not months." />
     <meta name="robots" content="index, follow" />
 
-    <!-- Canonical URL: replace https://your-domain-here.com with your real
-         production domain before deploying (also update
-         public/sitemap.xml and public/robots.txt, and set VITE_SITE_URL
-         in your .env — see .env.example). Individual pages set their own
-         canonical URL at runtime via src/hooks/use-document-title.ts. -->
-    <link rel="canonical" href="https://webcraftservices.online" />
+    <!-- Canonical URL for the homepage. This is the site's production
+         domain (also set in public/sitemap.xml, public/robots.txt,
+         public/CNAME, and VITE_SITE_URL / src/lib/site-config.ts — keep
+         all five in sync if the domain ever changes). Individual pages
+         override this with their own self-referencing canonical URL at
+         runtime via src/hooks/use-document-title.ts. -->
+    <link rel="canonical" href="https://webcraftservices.online/" />
 
-    <meta property="og:title" content="WebCraft Studio | Web Developer for Business & Personal Projects" />
-    <meta property="og:description" content="WebCraft Studio builds professional websites for businesses and handcrafted personal web experiences." />
+    <meta property="og:title" content="Business & Personal Website Development | WebCraft Services" />
+    <meta property="og:description" content="WebCraft Services designs professional business websites and handcrafted personal sites — mobile-responsive, custom-designed, and delivered in days, not months." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://webcraftservices.online" />
+    <meta property="og:site_name" content="WebCraft Services" />
+    <meta property="og:url" content="https://webcraftservices.online/" />
     <meta property="og:image" content="https://webcraftservices.online/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="WebCraft Studio — Websites made with intention." />
+    <meta property="og:image:alt" content="WebCraft Services — Websites made with intention." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="WebCraft Studio | Web Developer for Business & Personal Projects" />
-    <meta name="twitter:description" content="WebCraft Studio builds professional websites for businesses and handcrafted personal web experiences." />
+    <meta name="twitter:title" content="Business & Personal Website Development | WebCraft Services" />
+    <meta name="twitter:description" content="WebCraft Services designs professional business websites and handcrafted personal sites — mobile-responsive, custom-designed, and delivered in days, not months." />
     <meta name="twitter:image" content="https://webcraftservices.online/og-image.png" />
+
+    <!-- Favicon / site identity. apple-touch-icon and the PNG sizes are
+         raster exports of the same favicon.svg design (see
+         public/*.png), generated for platforms that don't accept SVG
+         icons (iOS home screen, some Android launchers, favicon
+         fallback in older browsers). -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#c4622f" />
+
+    <!-- Google Search Console verification: add your token here once
+         issued, e.g.
+         <meta name="google-site-verification" content="YOUR_TOKEN" />
+         Not added yet — see the SEO report for the exact step. -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Sitewide structured data: Organization + WebSite. Static and
+         identical on every route (per-route WebPage/Service/FAQPage/
+         BreadcrumbList entities are injected by
+         src/hooks/use-structured-data.ts). Kept in plain JSON here,
+         mirroring src/lib/structured-data.ts's organizationSchema() /
+         websiteSchema() — update both together if site-config.ts
+         changes. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://webcraftservices.online/#organization",
+            "name": "WebCraft Services",
+            "url": "https://webcraftservices.online/",
+            "logo": "https://webcraftservices.online/icon-512.png",
+            "email": "contact.webcraftservices@gmail.com",
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "email": "contact.webcraftservices@gmail.com",
+                "contactType": "customer service"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://webcraftservices.online/#website",
+            "url": "https://webcraftservices.online/",
+            "name": "WebCraft Services",
+            "publisher": { "@id": "https://webcraftservices.online/#organization" },
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

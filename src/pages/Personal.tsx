@@ -26,10 +26,46 @@ import {
 import { toast } from "sonner";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { useStructuredData } from "@/hooks/use-structured-data";
+import {
+  schemaGraph,
+  webPageSchema,
+  serviceSchema,
+  faqSchema,
+  type FaqItem,
+} from "@/lib/structured-data";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { CONTACT_EMAIL } from "@/lib/site-config";
 import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
 import { personalServices, personalBudgetRanges } from "@/data/pricing";
-import { scrollToId } from "@/lib/utils";
+import { scrollToId, parseDeliveryDays } from "@/lib/utils";
 
+const minDeliveryDays = Math.min(...personalServices.map((s) => parseDeliveryDays(s.delivery)));
+const maxDeliveryDays = Math.max(...personalServices.map((s) => parseDeliveryDays(s.delivery)));
+const cheapestService = personalServices[0];
+
+const personalFaqs: FaqItem[] = [
+  {
+    question: "How much does a personal website cost?",
+    answer: `Personal projects start ${cheapestService.price} for a ${cheapestService.title.toLowerCase()}. See the pricing on each option above — occasion and love-letter pages are priced separately.`,
+  },
+  {
+    question: "How long does a personal website take?",
+    answer: `Delivery ranges from ${minDeliveryDays} to ${maxDeliveryDays} days depending on the option you choose, shown on each card above.`,
+  },
+  {
+    question: "What kind of personal websites can you build?",
+    answer: "Portfolios and personal-brand sites, special-occasion pages for birthdays, anniversaries, and graduations, and heartfelt digital love letters for someone you care about.",
+  },
+  {
+    question: "Can I request specific colors or details?",
+    answer: "Yes — the inquiry form includes a field for special requests, so you can share colors, feelings, or elements you'd like included.",
+  },
+  {
+    question: "How do I get in touch?",
+    answer: `Fill out the inquiry form below, or reach out directly at ${CONTACT_EMAIL}.`,
+  },
+];
 
 const formSchema = z.object({
   name: z.string().min(2, "Your name is required"),
@@ -43,8 +79,30 @@ const formSchema = z.object({
 
 export default function Personal() {
   useDocumentTitle(
-    "Personal Web Projects | WebCraft Studio",
-    "Handcrafted digital spaces meant to celebrate, remember, and connect."
+    "Personal Website Development | WebCraft Services",
+    "Handcrafted personal websites, portfolios, and milestone pages — bespoke design meant to celebrate, remember, and connect. Transparent pricing, fast delivery."
+  );
+
+  useStructuredData(
+    schemaGraph([
+      webPageSchema({
+        path: "/personal",
+        name: "Personal Website Development | WebCraft Services",
+        description: "Handcrafted personal websites, portfolios, and milestone pages — bespoke design meant to celebrate, remember, and connect. Transparent pricing, fast delivery.",
+        breadcrumb: [
+          { name: "Studio", path: "/" },
+          { name: "Personal", path: "/personal" },
+        ],
+      }),
+      serviceSchema({
+        name: "Personal Website Design",
+        description:
+          "Handcrafted personal websites — portfolios, milestone celebration pages, and digital love letters.",
+        path: "/personal",
+        serviceType: "Personal website design and development",
+      }),
+      faqSchema(personalFaqs),
+    ])
   );
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -93,7 +151,8 @@ export default function Personal() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6 space-y-3">
+        <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Personal", href: "/personal" }]} />
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -138,6 +197,10 @@ export default function Personal() {
               src={`${import.meta.env.BASE_URL}personal-hero.svg`} 
               alt="Layered keepsake photo cards with a heart, representing a personal website" 
               className="w-full h-full object-cover"
+              width={1000}
+              height={1250}
+              loading="eager"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
           </div>
@@ -361,6 +424,23 @@ export default function Personal() {
                 </Button>
               </form>
             </Form>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-primary/5 border-t border-primary/10">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Personal Website FAQ</h2>
+          </div>
+          <div className="space-y-6">
+            {personalFaqs.map((faq) => (
+              <div key={faq.question} className="rounded-2xl border border-border bg-card p-6">
+                <h3 className="font-semibold text-foreground mb-2">{faq.question}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

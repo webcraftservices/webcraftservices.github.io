@@ -4,9 +4,14 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // GitHub Pages serves this project from https://nishantgulia147-star.github.io/WebCraft-Services/,
-  // so every built asset URL and the Wouter router base (see src/App.tsx,
-  // which reads import.meta.env.BASE_URL) need this prefix.
+  // Deployed to the custom domain https://webcraftservices.online/ (see
+  // public/CNAME) via GitHub Pages, so the site is served from the
+  // domain root — base stays '/'. Every built asset URL and the Wouter
+  // router base (see src/App.tsx, which reads import.meta.env.BASE_URL)
+  // resolve relative to this. If the custom domain is ever removed and
+  // the site falls back to the default
+  // https://webcraftservices.github.io/ project URL, this can stay '/'
+  // too, since that URL also serves from its own root.
   base: '/',
   plugins: [react(), tailwindcss()],
   resolve: {

@@ -1,3 +1,7 @@
+import { Link } from "wouter";
+import { CONTACT_EMAIL } from "@/lib/site-config";
+import { navLinks } from "@/data/navigation";
+
 export function Footer() {
   return (
     <footer className="w-full border-t border-border/40 bg-background py-10 sm:py-12 mt-16 sm:mt-24">
@@ -9,18 +13,31 @@ export function Footer() {
         <p className="text-muted-foreground text-sm max-w-sm">
           Crafting digital experiences with care, creativity, and love.
         </p>
+
+        <nav aria-label="Footer" className="flex items-center gap-4 text-sm">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} WebCraft Studio. All rights reserved.
+          © {new Date().getFullYear()} WebCraft Services. All rights reserved.
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-8 pt-8 border-t border-border/40 text-center">
         <p className="text-sm font-semibold text-foreground mb-1">Need help?</p>
         <a
-          href="mailto:contact.webcraftservices@gmail.com"
+          href={`mailto:${CONTACT_EMAIL}`}
           className="text-sm text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
-          Contact us at contact.webcraftservices@gmail.com
+          Contact us at {CONTACT_EMAIL}
         </a>
       </div>
     </footer>

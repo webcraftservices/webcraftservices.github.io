@@ -14,4 +14,7 @@ export const SITE_URL: string = (
   "https://webcraftservices.online"
 ).replace(/\/$/, "");
 
-export const SITE_NAME = "WebCraft Studio";
+export const SITE_NAME = "WebCraft Services";
+
+/** Public contact address, shown in the footer and used in structured data. */
+export const CONTACT_EMAIL = "contact.webcraftservices@gmail.com";

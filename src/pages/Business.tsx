@@ -26,9 +26,46 @@ import {
 import { toast } from "sonner";
 
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { useStructuredData } from "@/hooks/use-structured-data";
+import {
+  schemaGraph,
+  webPageSchema,
+  serviceSchema,
+  faqSchema,
+  type FaqItem,
+} from "@/lib/structured-data";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { submitInquiry, InquirySubmissionError } from "@/lib/submit-inquiry";
 import { businessPlans } from "@/data/pricing";
-import { scrollToId } from "@/lib/utils";
+import { scrollToId, parseDeliveryDays } from "@/lib/utils";
+
+const minDeliveryDays = Math.min(...businessPlans.map((p) => parseDeliveryDays(p.delivery)));
+const maxDeliveryDays = Math.max(...businessPlans.map((p) => parseDeliveryDays(p.delivery)));
+const cheapestPlan = businessPlans[0];
+const priciestPlan = businessPlans[businessPlans.length - 1];
+
+const businessFaqs: FaqItem[] = [
+  {
+    question: "How much does a business website cost?",
+    answer: `Plans start at ${cheapestPlan.price} for a ${cheapestPlan.name} site and go up to ${priciestPlan.price} for a fully custom ${priciestPlan.name} build. Full pricing and what's included in each plan is listed above.`,
+  },
+  {
+    question: "How long does a business website take to build?",
+    answer: `Delivery ranges from ${minDeliveryDays} to ${maxDeliveryDays} days depending on the plan and scope — the exact delivery window for each plan is shown on its pricing card.`,
+  },
+  {
+    question: "Will my business website be mobile-friendly?",
+    answer: "Yes. Every plan includes a mobile-responsive design as a standard feature, not an add-on.",
+  },
+  {
+    question: "Can I request revisions?",
+    answer: "Yes. Each plan includes a set number of revision rounds, shown in its feature list above, so you can fine-tune the design before launch.",
+  },
+  {
+    question: "What happens after I submit the inquiry form?",
+    answer: "We review your inquiry and get back to you within 24 hours to confirm your project details and next steps.",
+  },
+];
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -48,8 +85,31 @@ const formSchema = z.object({
 
 export default function Business() {
   useDocumentTitle(
-    "Business Web Development | WebCraft Studio",
-    "Professional, conversion-focused websites for companies, startups, and entrepreneurs who demand results."
+    "Business Website Development Services | WebCraft Services",
+    "Conversion-focused business website development for companies, startups, and entrepreneurs — custom design, mobile-responsive, transparent pricing, fast delivery."
+  );
+
+  useStructuredData(
+    schemaGraph([
+      webPageSchema({
+        path: "/business",
+        name: "Business Website Development Services | WebCraft Services",
+        description:
+          "Conversion-focused business website development for companies, startups, and entrepreneurs — custom design, mobile-responsive, transparent pricing, fast delivery.",
+        breadcrumb: [
+          { name: "Studio", path: "/" },
+          { name: "Business", path: "/business" },
+        ],
+      }),
+      serviceSchema({
+        name: "Business Website Design & Development",
+        description:
+          "Precision-crafted, conversion-focused websites for companies, startups, and entrepreneurs.",
+        path: "/business",
+        serviceType: "Business website design and development",
+      }),
+      faqSchema(businessFaqs),
+    ])
   );
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -98,7 +158,8 @@ export default function Business() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6 space-y-3">
+        <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Business", href: "/business" }]} />
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -143,6 +204,10 @@ export default function Business() {
               src={`${import.meta.env.BASE_URL}business-hero.svg`} 
               alt="Preview of a clean, professional business website with a growth chart" 
               className="w-full h-full object-cover"
+              width={1200}
+              height={900}
+              loading="eager"
+              fetchPriority="high"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-background/40 to-transparent" />
           </div>
@@ -364,6 +429,23 @@ export default function Business() {
                 </Button>
               </form>
             </Form>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-card border-t border-border/40">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Business Website FAQ</h2>
+          </div>
+          <div className="space-y-6">
+            {businessFaqs.map((faq) => (
+              <div key={faq.question} className="rounded-2xl border border-border bg-background p-6">
+                <h3 className="font-semibold text-foreground mb-2">{faq.question}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
