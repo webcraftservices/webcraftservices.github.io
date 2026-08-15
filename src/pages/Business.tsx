@@ -97,7 +97,7 @@ export default function Business() {
         description:
           "Conversion-focused business website development for companies, startups, and entrepreneurs — custom design, mobile-responsive, transparent pricing, fast delivery.",
         breadcrumb: [
-          { name: "Studio", path: "/" },
+          { name: "Home", path: "/" },
           { name: "Business", path: "/business" },
         ],
       }),
@@ -159,14 +159,14 @@ export default function Business() {
   return (
     <div className="flex flex-col w-full">
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6 space-y-3">
-        <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Business", href: "/business" }]} />
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Business", href: "/business" }]} />
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          data-testid="link-back-to-studio"
+          data-testid="link-back-to-home"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Studio
+          Back to Home
         </Link>
       </div>
       {/* Hero */}
@@ -447,6 +447,21 @@ export default function Business() {
               </div>
             ))}
           </div>
+          <p className="text-center text-muted-foreground text-sm sm:text-base mt-10">
+            Curious how it all comes together? See our{" "}
+            <Link href="/process" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              website development process
+            </Link>
+            . Building something more personal instead?{" "}
+            <Link href="/personal" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              Explore Personal projects
+            </Link>
+            , or{" "}
+            <Link href="/contact" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              contact us
+            </Link>{" "}
+            if you're not sure yet.
+          </p>
         </div>
       </section>
     </div>

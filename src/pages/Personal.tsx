@@ -90,7 +90,7 @@ export default function Personal() {
         name: "Personal Website Development | WebCraft Services",
         description: "Handcrafted personal websites, portfolios, and milestone pages — bespoke design meant to celebrate, remember, and connect. Transparent pricing, fast delivery.",
         breadcrumb: [
-          { name: "Studio", path: "/" },
+          { name: "Home", path: "/" },
           { name: "Personal", path: "/personal" },
         ],
       }),
@@ -152,14 +152,14 @@ export default function Personal() {
   return (
     <div className="flex flex-col w-full">
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-6 space-y-3">
-        <Breadcrumbs items={[{ label: "Studio", href: "/" }, { label: "Personal", href: "/personal" }]} />
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Personal", href: "/personal" }]} />
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          data-testid="link-back-to-studio"
+          data-testid="link-back-to-home"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Studio
+          Back to Home
         </Link>
       </div>
       {/* Hero */}
@@ -442,6 +442,21 @@ export default function Personal() {
               </div>
             ))}
           </div>
+          <p className="text-center text-muted-foreground text-sm sm:text-base mt-10">
+            Curious how it all comes together? See our{" "}
+            <Link href="/process" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              website development process
+            </Link>
+            . Need something for a company instead?{" "}
+            <Link href="/business" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              Explore Business services
+            </Link>
+            , or{" "}
+            <Link href="/contact" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              contact us
+            </Link>{" "}
+            if you're not sure yet.
+          </p>
         </div>
       </section>
     </div>

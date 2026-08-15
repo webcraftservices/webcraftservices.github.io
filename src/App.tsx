@@ -8,6 +8,9 @@ import { Layout } from '@/components/layout/Layout';
 const Home = lazy(() => import('@/pages/Home'));
 const Business = lazy(() => import('@/pages/Business'));
 const Personal = lazy(() => import('@/pages/Personal'));
+const About = lazy(() => import('@/pages/About'));
+const Process = lazy(() => import('@/pages/Process'));
+const Contact = lazy(() => import('@/pages/Contact'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 
 function Router() {
@@ -24,6 +27,9 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/business" component={Business} />
           <Route path="/personal" component={Personal} />
+          <Route path="/about" component={About} />
+          <Route path="/process" component={Process} />
+          <Route path="/contact" component={Contact} />
           <Route component={NotFound} />
         </Switch>
       </Suspense>

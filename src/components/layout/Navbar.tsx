@@ -9,6 +9,7 @@ import { navLinks } from "@/data/navigation";
 const formTargetByRoute: Record<string, string> = {
   "/business": "inquiry-form",
   "/personal": "personal-form",
+  "/contact": "contact-form",
 };
 
 export function Navbar() {

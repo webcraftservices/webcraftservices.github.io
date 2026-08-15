@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 export default function NotFound() {
-  useDocumentTitle("Page Not Found | WebCraft Studio", "The page you are looking for does not exist.", true);
+  useDocumentTitle("Page Not Found | WebCraft Services", "The page you are looking for does not exist.", true);
 
   return (
     <div className="flex-1 flex items-center justify-center min-h-[60vh] px-4 sm:px-6">
@@ -23,7 +23,7 @@ export default function NotFound() {
           className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Studio
+          Back to Home
         </Link>
       </motion.div>
     </div>

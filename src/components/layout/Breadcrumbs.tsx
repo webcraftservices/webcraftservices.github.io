@@ -9,7 +9,7 @@ export interface Crumb {
 
 /**
  * Semantic breadcrumb trail (Home > current page). Purely additive —
- * doesn't replace the existing "Back to Studio" link. Pair with
+ * doesn't replace the existing "Back to Home" link. Pair with
  * structured-data.ts's breadcrumbSchema() so the visible trail and the
  * BreadcrumbList JSON-LD always match.
  */

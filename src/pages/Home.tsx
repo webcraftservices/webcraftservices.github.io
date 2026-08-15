@@ -229,6 +229,21 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="text-center text-muted-foreground text-sm sm:text-base mt-10">
+            Want more detail? Read{" "}
+            <Link href="/about" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              more about the studio
+            </Link>
+            , see our{" "}
+            <Link href="/process" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              full website development process
+            </Link>
+            , or{" "}
+            <Link href="/contact" className="text-foreground underline underline-offset-4 hover:text-primary transition-colors">
+              get in touch
+            </Link>{" "}
+            if you have questions first.
+          </p>
         </div>
       </section>
     </div>

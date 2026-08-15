@@ -79,10 +79,12 @@ export function webPageSchema(options: {
   name: string;
   description: string;
   breadcrumb?: BreadcrumbItem[];
+  /** Defaults to "WebPage". Use a more specific WebPage subtype (e.g. "ContactPage", "CollectionPage") where genuinely appropriate. */
+  type?: string;
 }) {
   const url = `${SITE_URL}${options.path}`;
   return {
-    "@type": "WebPage",
+    "@type": options.type ?? "WebPage",
     "@id": `${url}#webpage`,
     url,
     name: options.name,
