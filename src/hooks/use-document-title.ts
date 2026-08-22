@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { SITE_URL } from "@/lib/site-config";
 
+function normalizeCanonicalPath(pathname: string) {
+  if (!pathname || pathname === "/") return "/";
+
+  const withTrailingSlash = pathname.endsWith("/") ? pathname : `${pathname}/`;
+  return withTrailingSlash === "//" ? "/" : withTrailingSlash;
+}
+
 function upsertMetaByName(name: string, content: string) {
   let el = document.querySelector(`meta[name="${name}"]`);
   if (!el) {
@@ -56,7 +63,7 @@ export function useDocumentTitle(
       noIndex ? "noindex, nofollow" : "index, follow",
     );
 
-    const canonicalUrl = `${SITE_URL}${window.location.pathname}`;
+    const canonicalUrl = `${SITE_URL}${normalizeCanonicalPath(window.location.pathname)}`;
     upsertCanonicalLink(canonicalUrl);
     upsertMetaByProperty("og:url", canonicalUrl);
   }, [title, description, noIndex]);
